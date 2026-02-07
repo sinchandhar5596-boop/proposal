@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Apabrita ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:#ffdce6;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.25) 0px,
+    rgba(255,255,255,0.25) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  font-family: Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  background:#fff6f8;
+  width:90%;
+  max-width:380px;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.15);
+  text-align:center;
+}
+
+/* PAGE 1 */
+.hey{
+  font-family:cursive;
+  color:#ff5a8f;
+  font-size:28px;
+}
+.sub{
+  color:#999;
+  margin-top:5px;
+}
+.mainq{
+  margin-top:20px;
+  font-size:26px;
+  font-weight:bold;
+  color:#5a1a1a;
+}
+
+/* BUTTONS */
+.choice-wrap{
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+}
+
+.noBtn, .yesBtn{
+  width:45%;
+  padding:14px 0;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.noBtn{
+  background:#ffd1dc;
+  color:#b3003c;
+}
+
+.yesBtn{
+  background:#ff9ab8;
+  color:white;
+  transition:0.3s;
+}
+
+.yesBtn.active{
+  background:#ff3b7a;
+  box-shadow:0 0 22px rgba(255,60,120,0.9);
+  transform:scale(1.1);
+}
+
+#noMsg{
+  margin-top:18px;
+  color:#e6004c;
+  min-height:26px;
+  font-size:16px;
+}
+
+/* PAGE 2 */
+.hidden{display:none;}
+
+.propose{
+  letter-spacing:4px;
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.message{
+  margin-top:15px;
+  font-family:cursive;
+  color:#ff5a8f;
+  font-size:18px;
+  line-height:1.5;
+}
+
+/* REPLY BOX */
+.reply-box{
+  margin-top:18px;
+  background:#ffe3ec;
+  padding:12px;
+  border-radius:15px;
+}
+
+.reply-box p{
+  margin:0 0 8px;
+  font-size:14px;
+  color:#b3003c;
+}
+
+.reply-box textarea{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:10px;
+  font-size:14px;
+  resize:none;
+  font-family:Arial, sans-serif;
+}
+
+.reply-box button{
+  margin-top:8px;
+  padding:6px 14px;
+  border:none;
+  border-radius:20px;
+  background:#ff7aa8;
+  color:white;
+  font-size:13px;
+}
+
+/* SIGNATURE */
+.signature{
+  margin-top:20px;
+  font-size:22px;
+  font-weight:bold;
+  color:#4a1a1a;
+}
+
+/* SHARE */
+.share{
+  margin-top:18px;
+  font-size:14px;
+  color:#777;
+}
+.share button{
+  margin:6px;
+  padding:8px 14px;
+  border:none;
+  border-radius:20px;
+  background:#ff7aa8;
+  color:white;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <div class="hey">Hey Apabrita...</div>
+  <div class="sub">I have something to ask you...</div>
+
+  <div class="mainq">Will you be mine forever? 💍</div>
+
+  <div class="choice-wrap">
+    <button class="noBtn" onclick="handleNo()">No 🙈</button>
+    <button class="yesBtn" id="yesBtn" onclick="handleYes()">Yes 💖</button>
+  </div>
+
+  <div id="noMsg"></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+  <div class="propose">PROPOSE DAY</div>
+
+  <div class="message">
+    Cutuu I lovee youu 🤗❤️<br>
+    Though we're already in a relationship,<br>
+    still I fall in love with you each and every day 😚❤️<br><br>
+    Will youuu be myy wifeyyy ??<br>
+    <i>(Though youu already are)</i> 🧿❤️
+  </div>
+
+  <!-- REPLY OPTION -->
+  <div class="reply-box">
+    <p>💌 Leave a little reply for me?</p>
+    <textarea rows="3" placeholder="Write something for me..."></textarea>
+    <button onclick="alert('Your reply is saved in my heart 💖')">Send 💕</button>
+  </div>
+
+  <div class="signature">Apabrita & Sinchan</div>
+
+  <div class="share">If you want, share our moment 💖</div>
+  <button onclick="shareWA()">💬 WhatsApp</button>
+  <button onclick="shareIG()">📸 Instagram</button>
+  <button onclick="copyLink()">🔗 Copy link</button>
+</div>
+
+<script>
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+const noMsg  = document.getElementById("noMsg");
+const yesBtn = document.getElementById("yesBtn");
+
+const msgs = [
+ "Erom korona plsss 🤧",
+ "You should always choose the right, not the left 🙃😚",
+ "Erom korle abr, kende deboo 🥺😭",
+ "O amrr cutuu, right side plsss 🥹",
+ "Final bar I’m tolerating “No” 😔"
+];
+
+let count = 0;
+
+function handleNo(){
+  if(count < msgs.length){
+    noMsg.textContent = msgs[count];
+    count++;
+  } else {
+    yesBtn.classList.add("active");
+    setTimeout(handleYes, 600);
+  }
+}
+
+function handleYes(){
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
+}
+
+function shareWA(){
+  window.open(
+    "https://wa.me/?text=I just said YES 💖 Apabrita & Sinchan 🧿❤️",
+    "_blank"
+  );
+}
+
+function shareIG(){
+  alert("Instagram doesn’t allow auto-posting.\nYou can share a screenshot or link 💖");
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copied 💖");
+}
+</script>
+
+</body>
+</html>
